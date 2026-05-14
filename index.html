@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação Estratégica - Google Style</title>
+    
+    <!-- Google Fonts: Roboto e Material Symbols -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <style>
+        :root {
+            /* Google Brand Colors */
+            --google-blue: #1a73e8;
+            --google-green: #137333;
+            --google-yellow: #f9ab00;
+            --google-red: #d93025;
+            --google-grey-bg: #f8f9fa;
+            --text-primary: #202124;
+            --text-secondary: #5f6368;
+            
+            /* UI Tokens */
+            --card-radius: 16px;
+            --btn-radius: 8px;
+            --shadow-1: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+            --shadow-2: 0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
+            --font-main: 'Roboto', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: #ffffff;
+            color: var(--text-primary);
+            overflow: hidden; /* Impede rolagem nativa */
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* --- Navigation Controls --- */
+        .controls {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: white;
+            border: 1px solid #dadce0;
+            color: var(--google-blue);
+            padding: 12px 24px;
+            border-radius: 24px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            box-shadow: var(--shadow-1);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            background-color: #f1f3f4;
+            box-shadow: var(--shadow-2);
+        }
+
+        .nav-btn:disabled {
+            color: #bdc1c6;
+            cursor: not-allowed;
+            background: #f8f9fa;
+        }
+
+        /* --- Slide Deck Structure --- */
+        .deck-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .slide {
+            min-width: 100vw;
+            height: 100vh;
+            padding: 48px 64px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* --- Typography & Common --- */
+        h1 {
+            font-size: 56px;
+            font-weight: 400; /* Roboto Light/Regular feel */
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 36px;
+            font-weight: 400;
+            color: var(--google-blue);
+            margin-bottom: 32px;
+        }
+
+        h3 {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        p, li {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .icon-big {
+            font-size: 64px;
+            color: var(--google-blue);
+            margin-bottom: 24px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-right: 8px;
+            background: #e8f0fe;
+            color: var(--google-blue);
+        }
+
+        /* --- Components --- */
+        .card {
+            background: white;
+            border-radius: var(--card-radius);
+            padding: 32px;
+            box-shadow: var(--shadow-1);
+            border: 1px solid #f1f3f4;
+            height: 100%;
+        }
+
+        .card.blue-bg {
+            background: #f8fbff;
+            border-left: 6px solid var(--google-blue);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            height: 100%;
+            align-items: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            height: 80%;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 24px;
+            border-radius: var(--card-radius);
+            background: var(--google-grey-bg);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--google-blue);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .feature-list .material-symbols-rounded {
+            color: var(--google-green);
+            margin-right: 12px;
+            font-size: 24px;
+            margin-top: 2px;
+        }
+
+        /* --- Specific Slide Styles --- */
+        
+        /* Slide 1 */
+        #slide-1 {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+        .meta-info {
+            margin-top: 48px;
+            display: flex;
+            gap: 32px;
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        .meta-item strong { color: var(--text-primary); }
+
+        /* Slide 6 */
+        .split-box {
+            display: flex;
+            height: 100%;
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-2);
+        }
+        .split-left {
+            flex: 1;
+            background: #f1f3f4;
+            padding: 40px;
+        }
+        .split-right {
+            flex: 1;
+            background: white;
+            padding: 40px;
+            border-left: 1px solid #e0e0e0;
+        }
+        .check-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+        .check-item.done .material-symbols-rounded { color: var(--google-green); font-variation-settings: 'FILL' 1; }
+        .check-item.todo .material-symbols-rounded { color: var(--text-secondary); border: 2px solid #ccc; border-radius: 50%; }
+
+        /* Footer */
+        .slide-footer {
+            position: absolute;
+            bottom: 24px;
+            left: 64px;
+            font-size: 14px;
+            color: #bdc1c6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 32px; }
+            h2 { font-size: 24px; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; overflow-y: auto; }
+            .slide { padding: 24px; }
+            .split-box { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegação -->
+    <div class="controls">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">
+            <span class="material-symbols-rounded">arrow_back</span> Anterior
+        </button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">
+            Próximo <span class="material-symbols-rounded">arrow_forward</span>
+        </button>
+    </div>
+
+    <div class="deck-container" id="deck">
+        
+        <!-- SLIDE 1: Abertura -->
+        <section class="slide" id="slide-1">
+            <span class="material-symbols-rounded icon-big">calendar_month</span>
+            <h1>Agendamento Autônomo:<br>Redefinindo a Experiência do Paciente</h1>
+            <p style="font-size: 24px; max-width: 800px;">
+                Plataforma Digital de Autoatendimento para Clínicas Odontológicas
+            </p>
+
+            <div class="meta-info">
+                <div class="meta-item">
+                    <strong>Apresentador:</strong> Google [Equipe de Produto & Engenharia]
+                </div>
+                <div class="meta-item">
+                    <strong>Contexto:</strong> Planejamento Estratégico e Arquitetura de Software
+                </div>
+            </div>
+            <div class="slide-footer">Slide 01 de 06</div>
+        </section>
+
+        <!-- SLIDE 2: Visão Geral (UX) -->
+        <section class="slide">
+            <h2>A Jornada do Paciente: Autonomia e Simplicidade</h2>
+            
+            <div class="grid-2">
+                <!-- User Story Card -->
+                <div class="card blue-bg">
+                    <h3><span class="material-symbols-rounded" style="vertical-align: bottom; margin-right: 8px;">person</span>User Story</h3>
+                    <p style="margin-top: 16px; font-style: italic; font-size: 20px;">
+                        "Como <strong>paciente</strong> da rede odontológica, desejo escolher especialidade, profissional e horário de forma independente, para otimizar meu tempo sem ligações."
+                    </p>
+                    <div style="margin-top: 24px;">
+                        <span class="tag">Autonomia</span>
+                        <span class="tag">Eficiência</span>
+                    </div>
+                </div>
+
+                <!-- Criteria -->
+                <div>
+                    <h3>Critérios de Aceite (MVP)</h3>
+                    <ul class="feature-list">
+                        <li>
+                            <span class="material-symbols-rounded">filter_list</span>
+                            <div>
+                                <strong>Filtragem Inteligente</strong><br>
+                                Seleção de especialidade prévia à lista de profissionais.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="material-symbols-rounded">verified_user</span>
+                            <div>
+                                <strong>Compatibilidade de Rede</strong><br>
+                                Exibição exclusiva de profissionais do convênio do usuário.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="material-symbols-rounded">visibility</span>
+                            <div>
+                                <strong>Transparência Total</strong><br>
+                                Visualização em tempo real de slots disponíveis.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-footer">Slide 02 de 06</div>
+        </section>
+
+        <!-- SLIDE 3: Requisitos de Negócio -->
+        <section class="slide">
+            <h2>Governança e Regras de Negócio</h2>
+            
+            <div class="grid-3">
+                <!-- Card 1 -->
+                <div class="card">
+                    <span class="material-symbols-rounded" style="color: var(--google-blue); font-size: 40px;">credit_card</span>
+                    <h3 style="margin-top: 16px;">Validação e Financeiro</h3>
+                    <ul class="feature-list" style="margin-top: 16px;">
+                        <li><span class="material-symbols-rounded">check_circle</span>Validação de carteirinha em tempo real.</li>
+                        <li><span class="material-symbols-rounded">check_circle</span>Gestão de coparticipação via Pix/Cartão.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <span class="material-symbols-rounded" style="color: var(--google-yellow); font-size: 40px;">policy</span>
+                    <h3 style="margin-top: 16px;">Políticas de Acesso</h3>
+                    <ul class="feature-list" style="margin-top: 16px;">
+                        <li><span class="material-symbols-rounded">schedule</span>Janela mínima de 24h para agendamento.</li>
+                        <li><span class="material-symbols-rounded">block</span>Limite de 3 agendamentos simultâneos/CPF.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <span class="material-symbols-rounded" style="color: var(--google-green); font-size: 40px;">medical_services</span>
+                    <h3 style="margin-top: 16px;">Gestão Clínica</h3>
+                    <ul class="feature-list" style="margin-top: 16px;">
+                        <li><span class="material-symbols-rounded">link</span>Vinculação obrigatória Dentista x Especialidade.</li>
+                        <li><span class="material-symbols-rounded">lock_clock</span>Bloqueio administrativo de slots.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-footer">Slide 03 de 06</div>
+        </section>
+
+        <!-- SLIDE 4: Requisitos Funcionais -->
+        <section class="slide">
+            <h2>Fluxo de Sistema e Funcionalidades Core</h2>
+            
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 40px;">
+                <!-- Step 1 -->
+                <div class="stat-box" style="width: 22%;">
+                    <span class="material-symbols-rounded" style="font-size: 48px; color: var(--google-blue);">search</span>
+                    <div style="margin-top: 16px;">
+                        <h3>Busca & Filtro</h3>
+                        <p style="font-size: 16px; margin-top: 8px;">Seleção cross-dominada por plano de saúde.</p>
+                    </div>
+                </div>
+
+                <span class="material-symbols-rounded" style="color: #ccc; font-size: 36px;">arrow_forward</span>
+
+                <!-- Step 2 -->
+                <div class="stat-box" style="width: 22%;">
+                    <span class="material-symbols-rounded" style="font-size: 48px; color: var(--google-blue);">edit_calendar</span>
+                    <div style="margin-top: 16px;">
+                        <h3>Calendário</h3>
+                        <p style="font-size: 16px; margin-top: 8px;">Visualização dinâmica de disponibilidade.</p>
+                    </div>
+                </div>
+
+                <span class="material-symbols-rounded" style="color: #ccc; font-size: 36px;">arrow_forward</span>
+
+                <!-- Step 3 -->
+                <div class="stat-box" style="width: 22%;">
+                    <span class="material-symbols-rounded" style="font-size: 48px; color: var(--google-blue);">task_alt</span>
+                    <div style="margin-top: 16px;">
+                        <h3>Checkout</h3>
+                        <p style="font-size: 16px; margin-top: 8px;">Resumo, confirmação e PDF.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 48px; background: #f1f3f4; border: none;">
+                <h3 style="color: var(--text-secondary);">Integrações Críticas</h3>
+                <div style="display: flex; gap: 48px; margin-top: 16px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span class="material-symbols-rounded" style="color: var(--google-green);">sync</span>
+                        <strong>Atomicidade na Agenda:</strong> Atualização imediata do sistema interno.
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span class="material-symbols-rounded" style="color: var(--google-green);">receipt_long</span>
+                        <strong>Trigger Automático:</strong> Envio para módulo de Faturamento.
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">Slide 04 de 06</div>
+        </section>
+
+        <!-- SLIDE 5: Requisitos Não-Funcionais -->
+        <section class="slide">
+            <h2>Performance, Segurança e Escalabilidade</h2>
+            
+            <div class="grid-2">
+                <div class="grid-3" style="grid-template-columns: 1fr 1fr; height: auto;">
+                    <div class="stat-box">
+                        <span class="stat-number">&lt; 1.5s</span>
+                        <span class="stat-label">Latência de Busca</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number" style="color: var(--google-green);">99.8%</span>
+                        <span class="stat-label">Uptime (SLA)</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <div class="card" style="display: flex; align-items: center; gap: 20px;">
+                        <span class="material-symbols-rounded" style="font-size: 40px; color: var(--google-blue);">security</span>
+                        <div>
+                            <h3>Segurança (LGPD)</h3>
+                            <p>Criptografia E2E para dados sensíveis e MFA para alterações cadastrais.</p>
+                        </div>
+                    </div>
+                    <div class="card" style="display: flex; align-items: center; gap: 20px;">
+                        <span class="material-symbols-rounded" style="font-size: 40px; color: var(--google-blue);">rocket_launch</span>
+                        <div>
+                            <h3>Concorrência</h3>
+                            <p>Suporte a 200 transações simultâneas. Lock lógico de 5 min no checkout.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">Slide 05 de 06</div>
+        </section>
+
+        <!-- SLIDE 6: DoR & DoD -->
+        <section class="slide">
+            <h2>Definição de Pronto e Entrega (DoR & DoD)</h2>
+            
+            <div class="split-box">
+                <div class="split-left">
+                    <h3 style="color: var(--google-blue);">Definition of Ready (DoR)</h3>
+                    <p style="margin-bottom: 24px;">Pronto para Desenvolver</p>
+                    
+                    <div class="check-item todo">
+                        <span class="material-symbols-rounded">check_box_outline_blank</span>
+                        Mockups High-Fidelity validados (Figma).
+                    </div>
+                    <div class="check-item todo">
+                        <span class="material-symbols-rounded">check_box_outline_blank</span>
+                        Regras de cancelamento formalizadas.
+                    </div>
+                    <div class="check-item todo">
+                        <span class="material-symbols-rounded">check_box_outline_blank</span>
+                        Swagger API homologado.
+                    </div>
+                    <div class="check-item todo">
+                        <span class="material-symbols-rounded">check_box_outline_blank</span>
+                        Carga inicial de dados ativa.
+                    </div>
+                </div>
+
+                <div class="split-right">
+                    <h3 style="color: var(--google-green);">Definition of Done (DoD)</h3>
+                    <p style="margin-bottom: 24px;">Pronto para Produção</p>
+
+                    <div class="check-item done">
+                        <span class="material-symbols-rounded">check_box</span>
+                        Peer Review aprovada (Zero débitos).
+                    </div>
+                    <div class="check-item done">
+                        <span class="material-symbols-rounded">check_box</span>
+                        Cobertura de testes > 80%.
+                    </div>
+                    <div class="check-item done">
+                        <span class="material-symbols-rounded">check_box</span>
+                        QA: Validação de agendamento duplicado.
+                    </div>
+                    <div class="check-item done">
+                        <span class="material-symbols-rounded">check_box</span>
+                        Notificações (SMS/E-mail) validadas.
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">Slide 06 de 06</div>
+        </section>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const deck = document.getElementById('deck');
+        const totalSlides = slides.length;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function updateUI() {
+            // Move the deck
+            deck.style.transform = `translateX(-${currentSlide * 100}vw)`;
+            
+            // Update buttons state
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            const newIndex = currentSlide + direction;
+            if (newIndex >= 0 && newIndex < totalSlides) {
+                currentSlide = newIndex;
+                updateUI();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                changeSlide(1);
+            } else if (e.key === 'ArrowLeft') {
+                changeSlide(-1);
+            }
+        });
+
+        // Initialize
+        updateUI();
+    </script>
+</body>
+</html>
