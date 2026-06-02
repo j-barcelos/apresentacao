@@ -983,4 +983,98 @@
         `
       },
       ortodontia: {
-        title: 'Ortodontia
+      title: 'Ortodontia',
+      content: `
+        <p>A ortodontia corrige o alinhamento dos dentes e da mordida, melhorando não apenas a estética, mas também a saúde bucal e funcionalidade.</p>
+        <ul>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Aparelhos fixos:</strong> Metálicos, cerâmicos ou safira</li>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Alinhadores invisíveis:</strong> Opção estética e removível</li>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Duração do tratamento:</strong> 12 a 24 meses em média</li>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Benefícios:</strong> Melhor mastigação, higiene facilitada, sorriso harmonioso</li>
+        </ul>
+        <p>Atendemos crianças, adolescentes e adultos com técnicas modernas e confortáveis.</p>
+      `
+    },
+    harmonizacao: {
+      title: 'Harmonização Orofacial',
+      content: `
+        <p>A harmonização facial busca equilibrar e valorizar as características naturais do rosto, proporcionando um resultado estético natural e harmonioso.</p>
+        <ul>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Procedimentos:</strong> Preenchimento labial, botox, bioestimuladores</li>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Resultados:</strong> Naturalidade e equilíbrio facial</li>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Duração:</strong> Efeitos duram de 6 meses a 2 anos</li>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Recuperação:</strong> Mínima, retorno imediato às atividades</li>
+        </ul>
+        <p>Procedimentos realizados por especialistas qualificados com foco em resultados naturais.</p>
+      `
+    },
+    proteses: {
+      title: 'Próteses Dentárias',
+      content: `
+        <p>As próteses dentárias restauram dentes ausentes, devolvendo função mastigatória, fala adequada e estética natural.</p>
+        <ul>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Próteses fixas:</strong> Coroas e pontes sobre dentes ou implantes</li>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Próteses removíveis:</strong> Total ou parcial, com conforto máximo</li>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Materiais:</strong> Porcelana, resina, zircônia</li>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Personalização:</strong> Cor, formato e tamanho sob medida</li>
+        </ul>
+        <p>Tecnologia digital para prototipagem precisa e resultados previsíveis.</p>
+      `
+    },
+    endodontia: {
+      title: 'Endodontia (Tratamento de Canal)',
+      content: `
+        <p>O tratamento endodôntico salva dentes que teriam que ser extraídos, removendo a polpa infectada e preservando a estrutura dental.</p>
+        <ul>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Tecnologia:</strong> Microscopia para máxima precisão</li>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Sem dor:</strong> Anestesia local e técnicas modernas</li>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Sessões:</strong> 1 a 3 consultas conforme complexidade</li>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Sucesso:</strong> Taxa de sucesso acima de 95%</li>
+        </ul>
+        <p>Preservamos seu dente natural com técnicas minimamente invasivas.</p>
+      `
+    },
+    odontopediatria: {
+      title: 'Odontopediatria',
+      content: `
+        <p>Cuidado especializado para a saúde bucal infantil, com abordagem humanizada e adaptada para cada faixa etária.</p>
+        <ul>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Primeira consulta:</strong> Recomendada aos 6 meses ou primeiro dente</li>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Prevenção:</strong> Flúor, selantes e orientações de higiene</li>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Ambiente:</strong> Lúdico e acolhedor para reduzir ansiedade</li>
+          <li><span class="iconify text-accent" data-icon="mdi:check-circle" data-width="20"></span><strong>Educação:</strong> Ensinamos hábitos saudáveis para toda a vida</li>
+        </ul>
+        <p>Transformamos a experiência dental em algo positivo para as crianças.</p>
+      `
+    }
+  };
+
+  function openTreatmentModal(treatment) {
+    const info = treatmentInfo[treatment];
+    if (!info) return;
+    
+    document.getElementById('modalTitle').textContent = info.title;
+    document.getElementById('modalBody').innerHTML = info.content;
+    document.getElementById('treatmentModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('treatmentModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Close modal when clicking outside
+  document.getElementById('treatmentModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeModal();
+    }
+  });
+
+  // Close modal with ESC key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  });
+</script>
